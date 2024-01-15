@@ -499,7 +499,7 @@ typename Vector<T>::Iterator Vector<T>::Iterator::operator+(size_t disp) // + op
 }
 
 template <typename T>
-typename Vector<T>::Iterator Vector<T>::Iterator::operator+=(size_t disp) // same as operator+, but without tmp iterator
+typename Vector<T>::Iterator& Vector<T>::Iterator::operator+=(size_t disp) // same as operator+, but without tmp iterator
 {
 	for (size_t i = 0; i < disp; ++i) // increment disp times our iterator
 	{
@@ -528,7 +528,7 @@ size_t Vector<T>::Iterator::operator-(Iterator it) // return the difference of i
 }
 
 template <typename T>
-typename Vector<T>::Iterator Vector<T>::Iterator::operator-=(size_t disp) // same as operator+=, but with -
+typename Vector<T>::Iterator& Vector<T>::Iterator::operator-=(size_t disp) // same as operator+=, but with -
 {
 	for (size_t i = 0; i < disp; ++i)
 	{

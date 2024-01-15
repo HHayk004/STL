@@ -36,10 +36,10 @@
 					Iterator& operator++(); // ++it
 					Iterator operator++(int); // it++
 					Iterator operator+(size_t);
-					Iterator operator+=(size_t);
+					Iterator& operator+=(size_t);
 					Iterator operator-(size_t);
                     size_t operator-(Iterator);
-					Iterator operator-=(size_t);
+					Iterator& operator-=(size_t);
 					Iterator& operator--(); // --it
 					Iterator operator--(int); // it--
 
@@ -101,6 +101,6 @@
 
     #include "vector_bool.h" // including bool vector specialization interface
 
-    #include "vector_T.hpp" // including template vector implementation
+    #include "vector.hpp" // including template vector implementation
     #include "vector_bool.hpp" // including bool vector specializetion implementation
 #endif
