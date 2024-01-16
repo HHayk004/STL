@@ -50,7 +50,10 @@
             void copy(const BST<T>& tree); // deep copy function
 
             ~BST(); // destructor
-            
+
+            BST<T>& operator=(const BST<T>& tree) noexcept;
+            BST<T>& operator=(BST<T>&& tree) noexcept;
+
             void insert(T value); // for insert element 
             void remove(T value); // for remove element (without destroy the BST structure)
 

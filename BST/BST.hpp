@@ -27,8 +27,11 @@
     template <typename T>
     BST<T>::BST(BST<T>&& tree) noexcept // move constructor
     {
-        m_root = std::move(tree.m_root); // moving our tree
-        tree.m_root = nullptr; // remove the ownership
+        if (this != &tree)
+        {
+            m_root = std::move(tree.m_root); // moving our tree
+            tree.m_root = nullptr; // remove the ownership
+        }
     }
 
     template <typename T>
@@ -93,6 +96,48 @@
             drop(m_root); // calling drop for delete the memory
             m_root = nullptr; // remove the dangling pointer
         }
+    }
+
+    template <typename T>
+    BST<T>& BST<T>::operator=(const BST<T>& tree) noexcept // assignment operator for copy
+    {
+        if (this != &tree) // checking for self-assignment
+        {
+            if (m_root) // if there are nodes, delete the memory of tree
+            {
+                drop(m_root); // clearing before copying
+                m_root = nullptr; // removing the dangling pointer
+            }
+
+            if (tree.m_root) // if tree isn't empty, make the copy
+            {
+                m_root = new Node(tree.m_root->val); // initializing the m_root
+                copyImpl(m_root, tree.m_root); // call the copy
+            }
+        }
+
+        return *this; // returning the object
+    }
+
+    template <typename T>
+    BST<T>& BST<T>::operator=(BST<T>&& tree) noexcept // assignment operator for move
+    {
+        if (this != &tree) // checking for self-assignment
+        {
+            if (m_root) // if there are nodes, delete the memory of tree
+            {
+                drop(m_root); // clearing the memory before move
+                m_root = nullptr; // removing the dangling pointer
+            }
+
+            if (tree.m_root) // if tree isn't empty
+            {
+                m_root = std::move(tree.m_root); // move the tree
+                tree.m_root = nullptr; // removing dangling pointer
+            }
+        }
+
+        return *this; // returning the object
     }
 
     template <typename T>
